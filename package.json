@@ -1,0 +1,54 @@
+{
+  "name": "numbermunchers",
+  "version": "1.0.0",
+  "description": "Number Munchers Game",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node server/server.js",
+    "build": "cross-env NODE_ENV=production webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toopham/numbermunchers.git"
+  },
+  "keywords": [
+    "Number",
+    "Math",
+    "Game"
+  ],
+  "author": "Tu Pham",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/toopham/numbermunchers/issues"
+  },
+  "homepage": "https://github.com/toopham/numbermunchers#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.5",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^5.3.0",
+    "redux": "^4.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.4.0",
+    "html-webpack-plugin": "^5.3.2",
+    "nodemon": "^2.0.13",
+    "redux-devtools-extension": "^2.13.9",
+    "sass": "^1.42.1",
+    "sass-loader": "^12.2.0",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.58.1",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1"
+  }
+}
