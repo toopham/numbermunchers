@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
+const { isValidObjectId } = require('mongoose');
 const userController ={};
 
 userController.createUser = (req, res, next) => {
@@ -14,6 +15,26 @@ userController.createUser = (req, res, next) => {
 		.catch((err) => {
 			return next(err);
 		});
+};
+
+userController.getUser = (req, res, next) => {
+	User.findById(req.cookies.muncher)
+		.then((user) => {
+			res.locals.user = user;
+			return next();
+		})
+		.catch((err) => next('ERROR IN getUSER : '+JSON.stringify(err)));
+};
+
+userController.updateUser = (req, res, next) => {
+	User.findByIdAndUpdate(res.locals.userId, {currentLevel: req.body.level, score: req.body.score}, (err, res)=>{
+		if(err){
+			next(err);
+		}
+		else{
+			next();
+		}
+	});
 };
 
 userController.verifyUser = (req, res, next) => {

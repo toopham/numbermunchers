@@ -1,26 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Signup extends Component{
-	constructor(props){
-		super(props);
-		this.state = [];
-
-	}
-
-	componentdidMount(){
-
-	}
-
-	render(){
-
-		return (<form method='POST' action='/signup'>
-			<input name="firstName" type="text" placeholder="First Name"></input>
-			<input name="lastName" type="text" placeholder="Last Name"></input>
-    <input name="userName" type="text" placeholder="Username"></input>
-    <input name="password" type="password"></input>
-    <input type='submit' value='Create User'></input>
-  	</form>);
-	}
+const Signup = () => {
+	return <div className='signup'><h3>SIGN UP TO PLAY!</h3><div>
+		<form method='POST' action='/signup'>
+			<div><input name="firstName" type="text" placeholder="First Name"></input></div>
+			<div><input name="lastName" type="text" placeholder="Last Name"></input></div>
+			<div><input name="userName" type="text" placeholder="Username"></input></div>
+			<div><input name="password" type="password" placeholder="Password"></input></div>
+			<div><input type='submit' value='Sign Up'></input></div>
+		</form>
+		</div></div>;
 
 }
 

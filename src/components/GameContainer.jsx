@@ -8,11 +8,14 @@ import * as actions from '../actions/actions';
 //mapState
 const mapStateToProps = (state) => ({
 	gridState: state.game.gridState,
+	firstName: state.game.firstName,
+	lastName: state.game.lastName,
 	level: state.game.level,
 	lives: state.game.lives,
+	score: state.game.score,
 	status: state.game.status,
 	muncherPos: state.game.muncherPos,
-	numGuards: state.game.numGuards,
+	numGens: state.game.numGens,
 });
 
 
@@ -36,26 +39,30 @@ const mapDispatchToProps = (dispatch) => ({
 	updateGame: (level) => {
 		dispatch(actions.updateGameActionCreator(level));
 	},
-	resetGame: (level) => {
-		dispatch(actions.updateGameActionCreator(level));
-	}
+	resetGame: () => {
+		dispatch(actions.updateGameActionCreator());
+	},
 });
 
 
 class GameContainer extends Component{
 	constructor(props){
 		super(props);
-
+		this.gameRef = React.createRef();
 
 	}
 
 	componentDidMount(){
-		this.props.updateGame(this.props.level);
+		this.props.resetGame();
+		this.gameRef.current.focus();
+	}
+
+	componentDidUpdate(){
+		this.gameRef.current.focus();
 	}
 
 	handleKey = e => {
 		
-		console.log(e.keyCode);
 		//If LEFT_ARROW IS PRESS
 		if(e.keyCode === 37) this.props.moveLeft();
 		//If UP_ARROW IS PRESS
@@ -70,12 +77,11 @@ class GameContainer extends Component{
 
 		const i = this.props.muncherPos[0];
 		const j = this.props.muncherPos[1];
-		console.log('VALUE CURRENTLY AT = ', this.props.gridState[i][j]);
 	}
 
 	render(){
-		return (<div className="gamecontainer" tabIndex="0" onKeyDown={this.handleKey}>
-		<GameStats lives={this.props.lives} level={this.props.level} status={this.props.status}resetGame={this.props.resetGame} />
+		return (<div className="gamecontainer" ref={this.gameRef} tabIndex="0" onKeyDown={this.handleKey}>
+		<GameStats lives={this.props.lives} level={this.props.level} score={this.props.score} userName={this.props.firstName+' '+this.props.lastName} status={this.props.status} updateGame={this.props.updateGame} resetGame={this.props.resetGame} />
 		<Game muncherPos={this.props.muncherPos} gridState={this.props.gridState} numGuards={this.props.numGuards}/>
 		</div>);
 	}

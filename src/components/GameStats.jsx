@@ -7,9 +7,9 @@ const GameStats = (props) =>{
 	const gameOver = 'GAME OVER! Try again?';
 	const gameWon = 'You Won! Awesome Job!';
 
-	const resetButton = <button onClick={()=>props.resetGame(props.level)}>Reset Game</button>;
-	const playAgainButton =  <button onClick={()=>props.resetGame(props.level)}>Play Again</button>;
-	const nextButton = <button onClick={()=>props.resetGame(props.level+1)}>Next Level</button>
+	const resetButton = <button onClick={()=>props.resetGame()}>Reset Game</button>;
+	const playAgainButton =  <button onClick={()=>props.resetGame()}>Play Again</button>;
+	const nextButton = <button onClick={()=>props.updateGame(props.level+1)}>Next Level</button>
 
 	let message = gameOver;
 	let options = playAgainButton;
@@ -23,12 +23,14 @@ const GameStats = (props) =>{
 		options = nextButton
 	}
 
-	return (<div className="gamestats">
-		<div>lives: {props.lives}</div> 
-		<div>level: {props.level}</div>
+	return <div className="gamestats">
+		<div className='statinfo'>User: {props.userName}</div>
+		<div className='statinfo'>Score: {props.score}</div>
+		<div className='statinfo'>Current level: {props.level}</div>
+		<div className='statinfo'><div style={{margin: '0 5px 0px 5px'}}> lives: </div><div className="liveBar" style={{width: props.lives*50+'px'}}>{props.lives}</div></div> 
 		<div className="gameinfo">{message}</div>
-		{options}
-		</div>);
+		<div className="gameinfo">{options}</div>
+		</div>;
 };
 
 

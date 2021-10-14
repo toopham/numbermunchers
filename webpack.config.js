@@ -36,8 +36,10 @@ module.exports = {
 
 	},
 	devServer: {
+		publicPath: '/public',
+		port: 8080,
 		proxy: {
-			'/api' : 'https://localhost:3000',
+			'/api/**' : 'https://localhost:3000',
 		},
 	},
 	resolve: {

@@ -30,3 +30,8 @@ export const updateGameActionCreator = (level) => ({
 	payload: level
 });
 
+export const updateUserActionCreator = (user) => ({
+	type: types.UPDATE_USER,
+	payload: user
+});
+

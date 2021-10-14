@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
-	background: rgb(92, 47, 255);
+	background: rgb(255, 255, 255);
 }
 
 h1 {
@@ -16,52 +18,90 @@ h2 {
 	margin: 5px;
 }
 
-button {
-	background-color:rgb(92, 47, 255);
-	border-radius: 2px;
-	border: 2px solid white;
-	width: 50px;
-	height: 20px;
+h3 {
+	font-family: 'Press Start 2P', cursive;
+	font-size: 2em;
+	color:rgb(0, 255, 179);
 }
+
+button {
+	display:inline-block;
+	padding: 0.5em 1.2em;
+	border-radius: 0.5em;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: 'Love Ya Like A Sister', cursive;
+	font-weight: bold;
+	color:black;
+	background-color:#adadad;
+	border: 1px solid gainsboro;
+	text-align: center;
+	position: relative;
+}
+
+button:hover{
+	background-color:white;
+	border: 1px solid white;
+}
+
+
 
 nav {
 	width: 100%;
-	background:rgba(255, 81, 0, 0.726);
+	background:black;
+	color: white;
 	display: flex;
-	flex-direction: column;
-	font-family: 'Cabin', sans-serif;
-
+	flex-direction: row;
+	justify-content: space-between;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	top: 0;
+	left: 0;
+	margin: 0;
 }
 
 nav ul{
 	list-style-type: none;
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	align-items: flex-end;
 }
 
+.title {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	font-family: 'Press Start 2P', cursive;
+	color:rgb(0, 255, 179);
+}
+
 nav ul li {
+	margin: 0px 5px 0px 5px;
 	width: 100px;
 	height: 20px;
 	background: black;
 	color: white;
-	border: 2px solid black;
 	display: flex;
 	justify-content: space-around;
+	text-decoration: none;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box; 
 }
 
 nav ul li:hover{
-	border: 2px solid rgb(0, 95, 219);
+	border: 1px solid white;
+	font-weight: bold;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box; 
 }
 
-nav ul li a{
-	color: white;
-	text-decoration: none;
-}
 
 nav ul li a:active{
 	color: gray;
+	text-decoration: none;
 }
 
 
@@ -77,6 +117,7 @@ nav ul li a:active{
 	width: 640px;
 	height: 640px;
 	display: flex;
+	margin: 10px;
 	flex-direction: column;
 	align-items: center;
 	font-family: 'Cabin', sans-serif;
@@ -84,16 +125,19 @@ nav ul li a:active{
 
 .gamestats{
 	width: 640px;
-	height: 100px;
+	height: 150px;
 	background-color: black;
-	border: 1px solid rgba(255, 81, 0, 0.726);
+	border: 1px solid rgba(255, 255, 255, 0.726);
 	border-radius: 5px 5px 0px 0px;
+	font-family: 'Love Ya Like A Sister', cursive;
 	color: white;
 	font-size: 1em;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding: 10px 10px 10px 10px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
 }
 .gamegrid {
 	display: grid;
@@ -102,6 +146,10 @@ nav ul li a:active{
 	height: 640px;
 	position: relative;
 	background-color: rgb(34, 34, 34);
+	border: 1px white solid;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box; 
 }
 
 .gamebox {
@@ -117,21 +165,101 @@ nav ul li a:active{
 }
 
 .gameinfo {
-	width: 100%;
+	grid-column-start: 1;
+	grid-column-end: 3;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	font-size: 1.5em;
-	color:rgb(255, 81, 81);
+	color:rgb(0, 255, 179);
+}
+
+.statinfo {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
 }
 
 .muncher {
-	border: 1px solid rgb(255, 81, 81);
+	border: 1px solid rgb(81, 255, 168);
 	width: 80px;
 	height: 80px;
 	position: absolute;
-	color: red;
+	color: rgb(0, 255, 179);
 	font-size: 1em;
 	left: 0px;
 	top: 0px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box; 
 }
+
+.liveBar {
+	background-color: red;
+	height: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.signup {
+	width: 800px;
+	height: 500px;
+	display: flex;
+	background: rgb(109, 109, 109);
+	color: white;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	padding: 20px;
+	border: 1px black solid;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box; 
+}
+
+input {
+	border: 1px rgb(78, 78, 78) solid;
+	border-radius: 5px;
+	width: 250px;
+	height: 35px;
+	font-size: 1.5em;
+	font-family: 'Roboto', sans-serif;
+	color: #4CAF50;
+	margin: 5px;
+}
+
+input:hover {
+	border-color: rgb(0, 255, 179);
+}
+
+input:focus {
+	border-color:rgb(0, 95, 219);
+}
+
+input[type=submit], input[type=button] {
+	background-color: rgb(0, 255, 179);;
+	color: black;
+	font-size: 1.5em;
+	width: 100px;
+	height: 35px;
+	display:inline-block;
+ 	border: 0.1em solid #FFFFFF;
+	border-radius: 0.12em;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	text-align: center;
+	transition: all 0.2s;
+}
+
+input[type=submit]:hover {
+	border: 0.15em solid gainsboro;
+	background-color: rgb(0, 255, 179);
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box; 
+}
+

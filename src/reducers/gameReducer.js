@@ -1,3 +1,4 @@
+import { updateUserActionCreator } from '../actions/actions';
 import * as types from '../constants/actionTypes';
 
 
@@ -10,11 +11,29 @@ const initialState = {
 	['-','-','-','-','-','-','-','-'],
 	['-','-','-','-','-','-','-','-'],
 	['-','-','-','-','-','-','-','-']],
+	firstName: 'Guest',
+	lastName: 'Player', 
 	level: 1,
 	lives: 3,
+	score: 0,
 	status: 1,
+	userID: '',
 	muncherPos: [0,0],
-	numGuards: {red: {color: 'red', Pos: [7,7], active: false}},
+	numGens: [{color: 'red', Pos: [7,7], active: false},
+						{color: 'blue', Pos: [7,7], active: false},
+						{color: 'orange', Pos: [7,7], active: false}],
+}
+
+
+const saveUser =(level, score) =>{
+	fetch('/api', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json',},
+		body: JSON.stringify({level: level, score: score})
+	})
+	.then(res => res.json())
+	.then(data => console.log('UPDATE user DB successfully :', data))
+	.catch(err => console.log('Error updating user: ',err));
 }
 
 const gameReducer = (state = initialState, action) => {
@@ -22,6 +41,8 @@ const gameReducer = (state = initialState, action) => {
 	let status = state.status;
 	let mult = state.level+1;
 	let level = state.level;
+	let lives = state.lives;
+	let score = state.score;
 	const newGrid = state.gridState.map(el => [...el]);
 	
 	switch (action.type){
@@ -29,7 +50,6 @@ const gameReducer = (state = initialState, action) => {
 			if(status===0) return {...state};
 			if(state.muncherPos[1]>0){
 				newPos[1]-=1;
-				console.log(newPos);
 			}
 
 			return {
@@ -40,7 +60,6 @@ const gameReducer = (state = initialState, action) => {
 			if(status===0) return {...state};
 			if(state.muncherPos[1]<7){
 				newPos[1]+=1;
-				console.log(newPos);
 			}
 
 			return {
@@ -51,7 +70,6 @@ const gameReducer = (state = initialState, action) => {
 			if(status===0) return {...state};
 			if(state.muncherPos[0]>0){
 				newPos[0]-=1;
-				console.log(newPos);
 			}
 
 			return {
@@ -62,7 +80,6 @@ const gameReducer = (state = initialState, action) => {
 			if(status===0) return {...state};
 			if(state.muncherPos[0]<7){
 				newPos[0]+=1;
-				console.log(newPos);
 			}
 
 			return {
@@ -80,6 +97,9 @@ const gameReducer = (state = initialState, action) => {
 			if(num%(state.level+1)===0){
 				newGrid[top][left]='';
 
+				//if you eat a 0 then increase lives by 1
+				if(num===0) lives+=1;
+
 				//assume game is over
 				status = 2;
 
@@ -96,11 +116,12 @@ const gameReducer = (state = initialState, action) => {
 				return {
 					...state,
 					gridState: newGrid,
+					lives: lives,
 					status: status,
 				}
 			}
 			else{
-				const lives = state.lives-1;
+				lives = state.lives-1;
 				if(lives===0) status=0;
 				return {
 					...state,
@@ -112,31 +133,55 @@ const gameReducer = (state = initialState, action) => {
 			if(action.payload){
 				mult = action.payload+1;
 				level = action.payload;
+				//scoring algorithm
+				score = score + lives*10*mult;
+
+				saveUser(level,score);
 			}
 
+			lives = 3;
+			if(level > 5) lives = 4;
+			if(level > 10) lives = 5;
 
 			for(let i = 0; i < 8; i++){
 				for(let j = 0; j< 8; j++){
 					// console.log('AT row i = ', i);
 					// console.log('AT col j = ', j);
 					// console.log('INJECTING NUM ', newGrid[i][j]);
-					newGrid[i][j] = Math.floor(Math.random()*40)*(mult+Math.floor(Math.random()*3));
+					newGrid[i][j] = Math.floor(Math.random()*20)*(mult+Math.floor(Math.random()*3));
+					if(newGrid[i][j]%mult === 0) newGrid[i][j]+=1;
 				}
 			}
 
-			//Inject in 10 numbers that are correct multiples
-			for(let k = 0; k < 10;k++){
+			//Inject in at most 20 numbers that are correct multiples
+			for(let k = 0; k < 20;k++){
 				let i = Math.floor(Math.random()*8);
 				let j = Math.floor(Math.random()*8);
 				newGrid[i][j] = Math.floor(Math.random()*40)*(mult);
 				// console.log("INJECTING NUMBER ", newGrid[i][j]);
 			}
 
+
+
 			return {
 				...state,
 				gridState: newGrid,
 				level: level,
+				lives: lives,
+				score: score,
 				status: 1,
+			}
+		case types.UPDATE_USER:
+			level = action.payload.currentLevel;
+			score = action.payload.score;
+			
+			return {
+				...state,
+				firstName: action.payload.firstName,
+				lastName: action.payload.lastName,
+				userID: action.payload._id.toString(),
+				level: level,
+				score: score,
 			}
 		default: {
 			return state;
