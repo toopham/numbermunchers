@@ -3,6 +3,17 @@ const bcrypt = require('bcryptjs');
 const { isValidObjectId } = require('mongoose');
 const userController ={};
 
+userController.getUsers = (req, res, next) =>{
+
+	User.find({}).sort('score').limit(10)
+		.then(users => {
+			res.locals.users = users;
+			return next();
+		})
+		.catch(err => next('Error in getUsers: '+JSON.stringify(err)));
+
+};
+
 userController.createUser = (req, res, next) => {
 	const encrypted = bcrypt.hashSync(req.body.password, 10);
 	const newUser = {... req.body, password: encrypted};

@@ -35,3 +35,13 @@ export const updateUserActionCreator = (user) => ({
 	payload: user
 });
 
+export const moveNumActionCreator = (pos) => ({
+	type: types.MOVE_NUM,
+	payload: pos
+});
+
+export const updateScoreBoardActionCreator = (users) => ({
+	type: types.SCORE_BOARD,
+	payload: users,
+});
+

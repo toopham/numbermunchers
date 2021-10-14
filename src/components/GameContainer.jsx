@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Game from './Game';
 import GameStats from './GameStats';
+import ScoreBoard from './ScoreBoard';
+import Rules from './Rules';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 
@@ -16,6 +18,7 @@ const mapStateToProps = (state) => ({
 	status: state.game.status,
 	muncherPos: state.game.muncherPos,
 	numGens: state.game.numGens,
+	scoreboard: state.game.scoreboard,
 });
 
 
@@ -42,6 +45,9 @@ const mapDispatchToProps = (dispatch) => ({
 	resetGame: () => {
 		dispatch(actions.updateGameActionCreator());
 	},
+	moveNum: () => {
+		dispatch(actions.moveNumActionCreator());
+	},
 });
 
 
@@ -49,12 +55,19 @@ class GameContainer extends Component{
 	constructor(props){
 		super(props);
 		this.gameRef = React.createRef();
+	}
 
+	genMover(){
+		this.props.moveNum();
+
+		setTimeout(this.genMover.bind(this), 1000);
 	}
 
 	componentDidMount(){
 		this.props.resetGame();
 		this.gameRef.current.focus();
+
+		this.genMover();
 	}
 
 	componentDidUpdate(){
@@ -80,10 +93,10 @@ class GameContainer extends Component{
 	}
 
 	render(){
-		return (<div className="gamecontainer" ref={this.gameRef} tabIndex="0" onKeyDown={this.handleKey}>
+		return (<div className="play"><ScoreBoard scoreboard={this.props.scoreboard} /><div className="gamecontainer" ref={this.gameRef} tabIndex="0" onKeyDown={this.handleKey}>
 		<GameStats lives={this.props.lives} level={this.props.level} score={this.props.score} userName={this.props.firstName+' '+this.props.lastName} status={this.props.status} updateGame={this.props.updateGame} resetGame={this.props.resetGame} />
-		<Game muncherPos={this.props.muncherPos} gridState={this.props.gridState} numGuards={this.props.numGuards}/>
-		</div>);
+		<Game muncherPos={this.props.muncherPos} numGens={this.props.numGens} gridState={this.props.gridState} numGuards={this.props.numGuards}/>
+		</div> <Rules /></div>);
 	}
 }
 

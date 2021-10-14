@@ -19,9 +19,10 @@ const initialState = {
 	status: 1,
 	userID: '',
 	muncherPos: [0,0],
-	numGens: [{color: 'red', Pos: [7,7], active: false},
+	numGens: [{color: 'red', Pos: [7,7], active: true},
 						{color: 'blue', Pos: [7,7], active: false},
 						{color: 'orange', Pos: [7,7], active: false}],
+	scoreboard: [{}],
 }
 
 
@@ -182,6 +183,46 @@ const gameReducer = (state = initialState, action) => {
 				userID: action.payload._id.toString(),
 				level: level,
 				score: score,
+			}
+		case types.MOVE_NUM:
+			const newGens = state.numGens.map(obj => Object.assign({},obj));
+			newGens.forEach(num=> {
+				if(num.active){
+					//create vector to Muncher
+					const x = state.muncherPos[1] - num.Pos[1];
+					const y = state.muncherPos[0] - num.Pos[0];
+					
+					if(Math.abs(y) > Math.abs(x)){
+						//move UP
+						if(y<0) num.Pos[0]-=1;
+						//move DOWN
+						if(y>0) num.Pos[0]+=1;
+
+					}
+					else{
+						//move LEFT
+						if(x<0) num.Pos[1]-=1;
+						//move RIGHT
+						if(x>0) num.Pos[1]+=1;
+					}
+				}
+			});
+
+			return {
+				...state,
+				numGens: newGens,
+			};
+		case types.SCORE_BOARD:
+			const users = action.payload;
+			const scoreboard = [];
+
+			users.forEach(user => {
+				scoreboard.push({...user});
+			});
+
+			return {
+				...state,
+				scoreboard: scoreboard,
 			}
 		default: {
 			return state;

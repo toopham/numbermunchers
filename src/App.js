@@ -26,7 +26,9 @@ const mapDispatchToProps = (dispatch) => ({
 	updateUser: (user) => {
 		dispatch(actions.updateUserActionCreator(user));
 	},
-
+	updateScoreBoard: (users) => {
+		dispatch(actions.updateScoreBoardActionCreator(users));
+	}
 });
 
 
@@ -43,6 +45,11 @@ class App extends Component {
 		fetch('/api').then(res => res.json())
 			.then(res => this.props.updateUser(res))
 			.catch(err => console.log('ERROR ACCESSING GET API ', err));
+		
+		fetch('/api/scores')
+			.then(res => res.json())
+			.then(data => this.props.updateScoreBoard(data))
+			.catch(err => console.log('ERROR GETTING SCORES: ', err));
 	}
 
 

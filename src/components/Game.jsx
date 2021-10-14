@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Box from './Box';
 import Muncher from'./Muncher';
+import NumGen from './NumGen';
 
 const Game = (props) =>{
 
@@ -12,9 +13,17 @@ const Game = (props) =>{
 		}		
 	}
 
+	const numGens = [];
+	props.numGens.forEach(num => {
+		if(num.active){
+			numGens.push(<NumGen color={num.color} Pos={num.Pos} />);
+		}
+	});
+
 	return (<div className="gamegrid">
 			{boxArray}
 			<Muncher top={props.muncherPos[0]} left={props.muncherPos[1]} />
+			{numGens}
 			</div>);
 };
 

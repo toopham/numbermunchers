@@ -5,5 +5,6 @@ export const MOVE_DOWN = 'MOVE_DOWN';
 export const EAT_NUM = 'EAT_NUM';
 export const UPDATE_GAME = 'UPDATE_GAME';
 export const UPDATE_USER = 'UPDATE_USER';
-
+export const MOVE_NUM = 'MOVE_NUM';
+export const SCORE_BOARD = 'SCORE_BOARD';
 export const SIZE = 80;

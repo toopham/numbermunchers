@@ -5,6 +5,7 @@
 
 body {
 	background: rgb(255, 255, 255);
+	padding: 0px;
 }
 
 h1 {
@@ -20,7 +21,19 @@ h2 {
 
 h3 {
 	font-family: 'Press Start 2P', cursive;
-	font-size: 2em;
+	font-size: 1.8em;
+	color:rgb(0, 255, 179);
+}
+
+h4 {
+	font-family: 'Press Start 2P', cursive;
+	font-size: 1.5em;
+	color:rgb(0, 255, 179);
+}
+
+h5 {
+	font-family: 'Press Start 2P', cursive;
+	font-size: 1.2em;
 	color:rgb(0, 255, 179);
 }
 
@@ -113,6 +126,76 @@ nav ul li a:active{
 
 }
 
+.play {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: flex-start;
+}
+
+.scoreboard{
+	width: 400px;
+	height: 600px;
+	margin: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	border: 1px solid black;
+	background-color: gray;
+	font-family: 'Roboto', sans-serif;
+}
+
+.userscore{
+	width: 300px;
+	height: 30px;
+	margin: 0px;
+	padding: 2px;
+	display: flex;
+	border: 1px solid black;
+	background-color: black;
+	flex-direction: row;
+}
+
+.score-header {
+	background-color: black;
+	width: 150px;
+	color:rgb(0, 255, 179);
+	font-size: 1.2em;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	text-align: left;
+	padding: 2px 10px 2px 10px;
+	margin: 0px;
+}
+
+.score-col {
+	width: 150px;
+	color:gold;
+	font-size: 1.2em;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	text-align: left;
+	padding: 2px 10px 2px 10px;
+	margin: 0px;
+}
+
+
+.rules {
+	width: 400px;
+	height: 600px;
+	margin: 20px;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	border: 1px solid black;
+	background-color: gainsboro;
+	font-family: 'Roboto', sans-serif;
+}
+
 .gamecontainer {
 	width: 640px;
 	height: 640px;
@@ -190,6 +273,20 @@ nav ul li a:active{
 	font-size: 1em;
 	left: 0px;
 	top: 0px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box; 
+}
+
+.numGen {
+	border: 1px solid rgb(233, 89, 5);
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	color: rgb(0, 255, 179);
+	font-size: 1em;
+	left: 560px;
+	top: 560px;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box; 

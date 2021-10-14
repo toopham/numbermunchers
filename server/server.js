@@ -35,6 +35,8 @@ app.post('/signup', userController.createUser, (req, res) => {
 app.get('/api', sessionController.isLoggedIn, userController.getUser, (req, res) => res.status(200).json(res.locals.user));
 app.post('/api', sessionController.isLoggedIn, userController.updateUser, (req, res) => res.status(200).json({}));
 
+app.get('/api/scores', userController.getUsers, (req, res) => res.status(200).json(res.locals.users));
+
 app.post('/login', userController.verifyUser, sessionController.startSession, 
 		cookieController.setSSIDCookie, (req, res) => {
 	return res.redirect(303, '/');
