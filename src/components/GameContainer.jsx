@@ -60,7 +60,9 @@ class GameContainer extends Component{
 	genMover(){
 		this.props.moveNum();
 
-		setTimeout(this.genMover.bind(this), 1000);
+		const speed = 6000 - 5000*(1/(1+Math.exp(0-this.props.level)));
+
+		if(this.props.status) setTimeout(this.genMover.bind(this), speed);
 	}
 
 	componentDidMount(){

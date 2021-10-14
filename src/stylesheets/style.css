@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
@@ -192,7 +192,7 @@ nav ul li a:active{
 	align-items: center;
 	justify-content: flex-start;
 	border: 1px solid black;
-	background-color: gainsboro;
+	background-color: gray;
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -287,6 +287,8 @@ nav ul li a:active{
 	font-size: 1em;
 	left: 560px;
 	top: 560px;
+	display: flex;
+	flex-direction: column-reverse;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box; 

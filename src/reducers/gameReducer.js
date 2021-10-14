@@ -45,6 +45,7 @@ const gameReducer = (state = initialState, action) => {
 	let lives = state.lives;
 	let score = state.score;
 	const newGrid = state.gridState.map(el => [...el]);
+	const newGens = state.numGens.map(obj => Object.assign({},obj));
 	
 	switch (action.type){
 		case types.MOVE_LEFT:
@@ -162,7 +163,10 @@ const gameReducer = (state = initialState, action) => {
 				// console.log("INJECTING NUMBER ", newGrid[i][j]);
 			}
 
-
+			//reset numBoss position
+			newGens.forEach(num=> {
+				num.Pos = [7,7];
+			});
 
 			return {
 				...state,
@@ -170,7 +174,9 @@ const gameReducer = (state = initialState, action) => {
 				level: level,
 				lives: lives,
 				score: score,
+				muncherPos: [0,0],
 				status: 1,
+				numGens: newGens,
 			}
 		case types.UPDATE_USER:
 			level = action.payload.currentLevel;
@@ -185,7 +191,6 @@ const gameReducer = (state = initialState, action) => {
 				score: score,
 			}
 		case types.MOVE_NUM:
-			const newGens = state.numGens.map(obj => Object.assign({},obj));
 			newGens.forEach(num=> {
 				if(num.active){
 					//create vector to Muncher
@@ -205,16 +210,27 @@ const gameReducer = (state = initialState, action) => {
 						//move RIGHT
 						if(x>0) num.Pos[1]+=1;
 					}
+
+					if(state.muncherPos[0] === num.Pos[0] && state.muncherPos[1] === num.Pos[1]){
+						console.log('LOST A LIVE ');
+						lives -=1;
+						if(lives===0) status=0;
+					}
+
 				}
+
 			});
 
 			return {
 				...state,
+				lives: lives,
+				status: status,
 				numGens: newGens,
 			};
 		case types.SCORE_BOARD:
 			const users = action.payload;
 			const scoreboard = [];
+			users.sort((a,b) => b.score - a.score);
 
 			users.forEach(user => {
 				scoreboard.push({...user});
