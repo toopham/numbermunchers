@@ -7,4 +7,5 @@ export const UPDATE_GAME = 'UPDATE_GAME';
 export const UPDATE_USER = 'UPDATE_USER';
 export const MOVE_NUM = 'MOVE_NUM';
 export const SCORE_BOARD = 'SCORE_BOARD';
+export const CHECK_STATE = 'CHECK_STATE';
 export const SIZE = 80;

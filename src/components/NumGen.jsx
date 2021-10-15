@@ -6,7 +6,7 @@ const NumGen = (props) => {
 	const topPos = String(props.Pos[0]*SIZE) + 'px';
 
 	return <div className="numGen" style={{left: leftPos, top: topPos}}>
-		numBOSS</div>;
+		numBOSS{props.value}</div>;
 
 };
 	

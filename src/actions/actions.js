@@ -45,3 +45,7 @@ export const updateScoreBoardActionCreator = (users) => ({
 	payload: users,
 });
 
+export const checkStateBoardActionCreator = () => ({
+	type: types.CHECK_STATE,
+});
+

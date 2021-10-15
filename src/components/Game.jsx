@@ -16,7 +16,7 @@ const Game = (props) =>{
 	const numGens = [];
 	props.numGens.forEach(num => {
 		if(num.active){
-			numGens.push(<NumGen color={num.color} Pos={num.Pos} />);
+			numGens.push(<NumGen color={num.color} Pos={num.Pos} value={num.value} />);
 		}
 	});
 

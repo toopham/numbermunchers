@@ -48,6 +48,9 @@ const mapDispatchToProps = (dispatch) => ({
 	moveNum: () => {
 		dispatch(actions.moveNumActionCreator());
 	},
+	checkState: () => {
+		dispatch(actions.checkStateBoardActionCreator());
+	}
 });
 
 
@@ -74,6 +77,7 @@ class GameContainer extends Component{
 
 	componentDidUpdate(){
 		this.gameRef.current.focus();
+
 	}
 
 	handleKey = e => {

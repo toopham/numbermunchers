@@ -19,8 +19,8 @@ const initialState = {
 	status: 1,
 	userID: '',
 	muncherPos: [0,0],
-	numGens: [{color: 'red', Pos: [7,7], active: true},
-						{color: 'blue', Pos: [7,7], active: false},
+	numGens: [{color: 'red', Pos: [7,7], active: true, value: ''},
+						{color: 'blue', Pos: [7,7], active: false, value: ''},
 						{color: 'orange', Pos: [7,7], active: false}],
 	scoreboard: [{}],
 }
@@ -54,9 +54,28 @@ const gameReducer = (state = initialState, action) => {
 				newPos[1]-=1;
 			}
 
+			newGens.forEach(num=>{
+				if(newPos[0]===num.Pos[0] && newPos[1]===num.Pos[1]){
+					if(newGrid[newPos[0]][newPos[1]]%mult===0){
+						num.active = false;
+						num.value = newGrid[newPos[0]][newPos[1]];
+					}
+					else{
+						lives-=1;
+					}
+					newGrid[newPos[0]][newPos[1]] = '';
+				}
+			});
+
+			if(lives===0) status=0;
+
 			return {
 				...state,
+				lives: lives,
+				status: status,
+				gridState: newGrid,
 				muncherPos: newPos,
+				numGens: newGens,
 			};
 		case types.MOVE_RIGHT:
 			if(status===0) return {...state};
@@ -64,9 +83,28 @@ const gameReducer = (state = initialState, action) => {
 				newPos[1]+=1;
 			}
 
+			newGens.forEach(num=>{
+				if(newPos[0]===num.Pos[0] && newPos[1]===num.Pos[1]){
+					if(newGrid[newPos[0]][newPos[1]]%mult===0){
+						num.active = false;
+						num.value = newGrid[newPos[0]][newPos[1]];
+					}
+					else{
+						lives-=1;
+					}
+					newGrid[newPos[0]][newPos[1]] = '';
+				}
+			});
+
+			if(lives===0) status=0;
+
 			return {
 				...state,
+				lives: lives,
+				status: status,
+				gridState: newGrid,
 				muncherPos: newPos,
+				numGens: newGens,
 			};
 		case types.MOVE_UP:
 			if(status===0) return {...state};
@@ -74,9 +112,28 @@ const gameReducer = (state = initialState, action) => {
 				newPos[0]-=1;
 			}
 
+			newGens.forEach(num=>{
+				if(newPos[0]===num.Pos[0] && newPos[1]===num.Pos[1]){
+					if(newGrid[newPos[0]][newPos[1]]%mult===0){
+						num.active = false;
+						num.value = newGrid[newPos[0]][newPos[1]];
+					}
+					else{
+						lives-=1;
+					}
+					newGrid[newPos[0]][newPos[1]] = '';
+				}
+			});
+
+			if(lives===0) status=0;
+
 			return {
 				...state,
+				lives: lives,
+				status: status,
+				gridState: newGrid,
 				muncherPos: newPos,
+				numGens: newGens,
 			};
 		case types.MOVE_DOWN:
 			if(status===0) return {...state};
@@ -84,9 +141,28 @@ const gameReducer = (state = initialState, action) => {
 				newPos[0]+=1;
 			}
 
+			newGens.forEach(num=>{
+				if(newPos[0]===num.Pos[0] && newPos[1]===num.Pos[1]){
+					if(newGrid[newPos[0]][newPos[1]]%mult===0){
+						num.active = false;
+						num.value = newGrid[newPos[0]][newPos[1]];
+					}
+					else{
+						lives-=1;
+					}
+					newGrid[newPos[0]][newPos[1]] = '';
+				}
+			});
+
+			if(lives===0) status=0;
+
 			return {
 				...state,
+				lives: lives,
+				status: status,
+				gridState: newGrid,
 				muncherPos: newPos,
+				numGens: newGens,
 			};
 		case types.EAT_NUM:
 			if(status===0) return {...state};
@@ -197,28 +273,41 @@ const gameReducer = (state = initialState, action) => {
 					const x = state.muncherPos[1] - num.Pos[1];
 					const y = state.muncherPos[0] - num.Pos[0];
 					
+					let numPosx = num.Pos[1];
+					let numPosy = num.Pos[0];
+					
 					if(Math.abs(y) > Math.abs(x)){
 						//move UP
-						if(y<0) num.Pos[0]-=1;
+						if(y<0) numPosy-=1;
 						//move DOWN
-						if(y>0) num.Pos[0]+=1;
+						if(y>0) numPosy+=1;
 
+						
 					}
 					else{
 						//move LEFT
-						if(x<0) num.Pos[1]-=1;
+						if(x<0) numPosx-=1;
 						//move RIGHT
-						if(x>0) num.Pos[1]+=1;
+						if(x>0) numPosx+=1;
 					}
 
-					if(state.muncherPos[0] === num.Pos[0] && state.muncherPos[1] === num.Pos[1]){
-						console.log('LOST A LIVE ');
-						lives -=1;
-						if(lives===0) status=0;
+					const top = state.muncherPos[0];
+					const left = state.muncherPos[1];
+
+					if(top === numPosy && left === numPosx){
+						if(newGrid[top][left]%mult===0){
+							return {...state};
+						} 
+						else{
+							newGrid[top][left]='';
+							lives -=1;
+							if(lives===0) status=0;
+						}
 					}
 
+					num.Pos[1]=numPosx;
+					num.Pos[0]=numPosy;
 				}
-
 			});
 
 			return {
@@ -226,6 +315,7 @@ const gameReducer = (state = initialState, action) => {
 				lives: lives,
 				status: status,
 				numGens: newGens,
+				gridState: newGrid,
 			};
 		case types.SCORE_BOARD:
 			const users = action.payload;
@@ -239,6 +329,27 @@ const gameReducer = (state = initialState, action) => {
 			return {
 				...state,
 				scoreboard: scoreboard,
+			}
+		case types.CHECK_STATE:
+			newGens.forEach(num=>{
+				if(newPos[0]===num.Pos[0] && newPos[1]===num.Pos[1]){
+					if(newGrid[newPos[0]][newPos[1]]%mult===0){
+						num.active = false;
+					}
+					else{
+						lives-=1;
+					}
+					newGrid[newPos[0]][newPos[1]] = '';
+				}
+			});
+
+			if(lives===0) status=0;
+			
+			return {
+				...state,
+				lives: lives,
+				status: status,
+				gridState: newGrid,
 			}
 		default: {
 			return state;
