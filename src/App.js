@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import GameContainer from "./components/GameContainer";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import Cookies from 'js-cookie';
+import axios from 'axios';
 import './stylesheets/style.css';
 import {
   BrowserRouter as Router,
@@ -17,6 +17,7 @@ import * as actions from './actions/actions';
 const mapStateToProps = (state) => ({
 	firstName: state.game.firstName,
 	lastName: state.game.lastName,
+	userName: state.game.userName,
 	level: state.game.level,
 	score: state.game.score,
 });
@@ -40,17 +41,20 @@ class App extends Component {
 	}
 
 	componentDidMount(){
-		const cookie = Cookies.get('muncher');
-		
-		fetch('/api').then(res => res.json())
-			.then(res => this.props.updateUser(res))
+		axios.get('/api').then(res => res.data)
+			.then(res => {
+				this.props.updateUser(res);
+			})
 			.catch(err => console.log('ERROR ACCESSING GET API ', err));
 		
-		fetch('/api/scores')
-			.then(res => res.json())
+		axios.get('/api/scores')
+			.then(res => res.data)
 			.then(data => this.props.updateScoreBoard(data))
 			.catch(err => console.log('ERROR GETTING SCORES: ', err));
 	}
+
+
+
 
 
 
@@ -83,10 +87,10 @@ class App extends Component {
 							<GameContainer />
 						</Route>
 						<Route path="/signup">
-							<Signup />
+							<Signup updateUser={this.props.updateUser} />
 						</Route>
 						<Route path="/">
-							<Login />
+							<Login user={this.props} />
 						</Route>
 					</Switch>
 				</div>

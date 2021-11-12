@@ -10,7 +10,7 @@ userController.getUsers = (req, res, next) =>{
 			res.locals.users = users;
 			return next();
 		})
-		.catch(err => next('Error in getUsers: '+JSON.stringify(err)));
+		.catch(err => next('Error in get users: '+JSON.stringify(err)));
 
 };
 
@@ -21,6 +21,7 @@ userController.createUser = (req, res, next) => {
 	User.create(newUser)
 		.then((user) => {
 			res.locals.userId = user._id.toString();
+			res.locals.userName = user.userName;
 			return next();
 		})
 		.catch((err) => {
@@ -29,12 +30,28 @@ userController.createUser = (req, res, next) => {
 };
 
 userController.getUser = (req, res, next) => {
-	User.findById(req.cookies.muncher)
+	if(res.locals.userId){
+		User.findById(res.locals.userId)
 		.then((user) => {
+			user._id = user._id.toString();
 			res.locals.user = user;
 			return next();
 		})
-		.catch((err) => next('ERROR IN getUSER : '+JSON.stringify(err)));
+		.catch((err) => next('ERROR in get user : '+JSON.stringify(err)));
+	}
+	else{ 
+		res.locals.user ={
+			firstName: 'Guest',
+			lastName: 'Player', 
+			userName: 'Guest',
+			currentLevel: 1,
+			lives: 3,
+			score: 0,
+			status: 1,
+			userID: '',
+		};
+		return next();
+	}
 };
 
 userController.updateUser = (req, res, next) => {
@@ -54,6 +71,7 @@ userController.verifyUser = (req, res, next) => {
 			if(user[0]){
 				if(bcrypt.compareSync(req.body.password, user[0].password)){
 					res.locals.userId = user[0]._id.toString();
+					res.locals.userName = user[0].userName;
 					return next();
 				}
 				else{

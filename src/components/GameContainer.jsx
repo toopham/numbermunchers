@@ -12,6 +12,7 @@ const mapStateToProps = (state) => ({
 	gridState: state.game.gridState,
 	firstName: state.game.firstName,
 	lastName: state.game.lastName,
+	userName: state.game.userName,
 	level: state.game.level,
 	lives: state.game.lives,
 	score: state.game.score,
@@ -100,7 +101,7 @@ class GameContainer extends Component{
 
 	render(){
 		return (<div className="play"><ScoreBoard scoreboard={this.props.scoreboard} /><div className="gamecontainer" ref={this.gameRef} tabIndex="0" onKeyDown={this.handleKey}>
-		<GameStats lives={this.props.lives} level={this.props.level} score={this.props.score} userName={this.props.firstName+' '+this.props.lastName} status={this.props.status} updateGame={this.props.updateGame} resetGame={this.props.resetGame} />
+		<GameStats lives={this.props.lives} level={this.props.level} score={this.props.score} userName={this.props.userName} status={this.props.status} updateGame={this.props.updateGame} resetGame={this.props.resetGame} />
 		<Game muncherPos={this.props.muncherPos} numGens={this.props.numGens} gridState={this.props.gridState} numGuards={this.props.numGuards}/>
 		</div> <Rules /></div>);
 	}

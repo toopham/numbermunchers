@@ -7,7 +7,7 @@ cookieController.setCookie = (req, res, next) => {
 };
 
 cookieController.setSSIDCookie = (req, res, next) => {
-	res.cookie('muncher', res.locals.userId, {httpOnly: true});
+	res.cookie('muncher', res.locals.session, {httpOnly: true});
 	next();
 };
 

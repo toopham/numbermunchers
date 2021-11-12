@@ -12,7 +12,10 @@ const Rules = (props) =>{
 		goals.push(<p>{i+1} ) {rules[i]}</p>);
 	}
 
-	return (<div className="rules"><h5>Objective</h5><p>{goals} </p></div>);
+	return (<fieldset id='rules'>
+	<legend>Objective</legend>
+	{goals}
+	</fieldset>);
 };
 
 export default Rules;

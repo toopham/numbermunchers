@@ -12,10 +12,10 @@ const ScoreBoard = (props) => {
 		scores.push(<UserScore userName={user.userName} firstName={user.firstName} score={user.score} />)
 	});
 
-	return (<div className="scoreboard">
-		<h4>Score Leaders</h4>
+	return (<fieldset id='scoreboard'>
+		<legend>Score Leaders</legend>
 		{scores}
-		</div>);
+		</fieldset>);
 };
 
 export default ScoreBoard;

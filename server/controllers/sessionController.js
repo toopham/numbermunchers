@@ -1,16 +1,19 @@
 const Session = require('../models/sessionModel');
+const bcrypt = require('bcryptjs');
 const sessionController = {};
 
 sessionController.isLoggedIn = (req, res, next) => {
-
+	console.log('COOKIES MUNCHER :', req.cookies.muncher);
 	Session.find({ cookieID: req.cookies.muncher})
 		.then( session => {
 			if(session[0]){
-				res.locals.userId = req.cookies.muncher;
+				console.log('IS LOGGED IN: ', session[0])
+				res.locals.userId = session[0].userID;
 				return next();
 			}
 			else{
-				return next('Error: not logged in');
+				console.log('NOT LOGGED IN');
+				return next();
 			}
 		})
 		.catch(err => next('Error in sessionController  isLoggedIn:'+JSON.stringify(err)));
@@ -18,7 +21,9 @@ sessionController.isLoggedIn = (req, res, next) => {
 
 
 sessionController.startSession = (req, res, next) =>{
-	Session.create({cookieID: res.locals.userId})
+	res.locals.session = bcrypt.hashSync(res.locals.userName, 10);
+	
+	Session.create({cookieID: res.locals.session, userID: res.locals.userId})
 		.then(session => next())
 		.catch(err => next('Error in sessionController startSession'+JSON.stringify(err)));
 };

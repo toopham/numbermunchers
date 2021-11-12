@@ -1,6 +1,6 @@
 {
   "name": "numbermunchers",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Number Munchers Game",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/toopham/numbermunchers#readme",
   "dependencies": {
+    "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
@@ -43,6 +44,7 @@
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
+    "concurrently": "^6.3.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.4.0",
     "html-webpack-plugin": "^5.3.2",

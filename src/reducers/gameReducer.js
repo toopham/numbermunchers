@@ -12,7 +12,8 @@ const initialState = {
 	['-','-','-','-','-','-','-','-'],
 	['-','-','-','-','-','-','-','-']],
 	firstName: 'Guest',
-	lastName: 'Player', 
+	lastName: 'Player',
+	userName: 'Guest', 
 	level: 1,
 	lives: 3,
 	score: 0,
@@ -255,16 +256,16 @@ const gameReducer = (state = initialState, action) => {
 				numGens: newGens,
 			}
 		case types.UPDATE_USER:
-			level = action.payload.currentLevel;
-			score = action.payload.score;
+
 			
 			return {
 				...state,
 				firstName: action.payload.firstName,
 				lastName: action.payload.lastName,
-				userID: action.payload._id.toString(),
-				level: level,
-				score: score,
+				userName: action.payload.userName,
+				userID: action.payload._id,
+				level: action.payload.currentLevel,
+				score: action.payload.score,
 			}
 		case types.MOVE_NUM:
 			newGens.forEach(num=> {

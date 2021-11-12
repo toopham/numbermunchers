@@ -27,8 +27,8 @@ app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, '../public')));
 
 // serve index.html on the route '/'
-app.post('/signup', userController.createUser, (req, res) => {
-	return res.redirect(303, '/');
+app.post('/signup', userController.createUser, sessionController.startSession, cookieController.setSSIDCookie, (req, res) => {
+	return res.status(200).json(res.locals.user);
 });
 
 //serve user info if user is logged in
@@ -48,6 +48,12 @@ app.get('/', sessionController.isLoggedIn, (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+
+app.use((req,res) => res.redirect(404, '/'));
+
+app.use( (err, req, res, next) => {
+	return res.redirect(500,'/');
+});
 
 
 app.listen(3000); //listens on port 3000 -> http://localhost:3000/

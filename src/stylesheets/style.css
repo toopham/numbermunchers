@@ -50,11 +50,15 @@ button {
 	border: 1px solid gainsboro;
 	text-align: center;
 	position: relative;
+	margin: 1em 2em;
+  padding: 0.1em 0;
+  border-radius: 0.5em;
+  box-shadow: 0 0.2em 0.3em 0.1em rgba(0,0,0,0.2);
 }
 
 button:hover{
-	background-color:white;
-	border: 1px solid white;
+	background-color:rgb(0, 255, 179);
+	color: black;
 }
 
 
@@ -134,16 +138,16 @@ nav ul li a:active{
 	align-items: flex-start;
 }
 
-.scoreboard{
+#scoreboard{
 	width: 400px;
 	height: 600px;
 	margin: 20px;
+	padding: 10px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
-	border: 1px solid black;
-	background-color: gray;
+	background-color: #2a9d8f;
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -153,15 +157,14 @@ nav ul li a:active{
 	margin: 0px;
 	padding: 2px;
 	display: flex;
-	border: 1px solid black;
-	background-color: black;
+	background-color: #2a9d8f;
 	flex-direction: row;
 }
 
 .score-header {
-	background-color: black;
+	background-color: #2a9d8f;
 	width: 150px;
-	color:rgb(0, 255, 179);
+	color: #e76f51;
 	font-size: 1.2em;
 	font-family: 'Roboto', sans-serif;
 	font-weight: bold;
@@ -172,7 +175,7 @@ nav ul li a:active{
 
 .score-col {
 	width: 150px;
-	color:gold;
+	color: #e9c46a;
 	font-size: 1.2em;
 	font-family: 'Roboto', sans-serif;
 	font-weight: bold;
@@ -182,7 +185,7 @@ nav ul li a:active{
 }
 
 
-.rules {
+#rules {
 	width: 400px;
 	height: 600px;
 	margin: 20px;
@@ -191,8 +194,9 @@ nav ul li a:active{
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
-	border: 1px solid black;
-	background-color: gray;
+	background-color: #2a9d8f;
+	color: white;
+	font-size: 1.5em;
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -204,6 +208,8 @@ nav ul li a:active{
 	flex-direction: column;
 	align-items: center;
 	font-family: 'Cabin', sans-serif;
+	border-radius: 0.5em;
+	box-shadow: 0 0.1em 0.2em 0.1em rgba(0,0,0,0.2);
 }
 
 .gamestats{
@@ -295,24 +301,27 @@ nav ul li a:active{
 }
 
 .liveBar {
-	background-color: red;
+	background-color: #e63946;
 	height: 15px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.signup {
+#signup {
 	width: 800px;
 	height: 500px;
 	display: flex;
-	background: rgb(109, 109, 109);
-	color: white;
 	flex-direction: column;
-	justify-content: space-around;
 	align-items: center;
-	padding: 20px;
-	border: 1px black solid;
+	margin: 10px;
+	color: #e63946;
+	background-color: #fff;
+	border: none;
+	margin: 1em 2em;
+	padding: 0.1em 0;
+	border-radius: 0.5em;
+	box-shadow: 0 0.2em 0.3em 0.1em rgba(0,0,0,0.2);
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box; 
@@ -333,9 +342,6 @@ input:hover {
 	border-color: rgb(0, 255, 179);
 }
 
-input:focus {
-	border-color:rgb(0, 95, 219);
-}
 
 input[type=submit], input[type=button] {
 	background-color: rgb(0, 255, 179);;
@@ -344,14 +350,15 @@ input[type=submit], input[type=button] {
 	width: 100px;
 	height: 35px;
 	display:inline-block;
- 	border: 0.1em solid #FFFFFF;
-	border-radius: 0.12em;
 	box-sizing: border-box;
 	text-decoration: none;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	text-align: center;
-	transition: all 0.2s;
+	margin: 1em 2em;
+  padding: 0.1em 0;
+  border-radius: 0.5em;
+  box-shadow: 0 0.2em 0.3em 0.1em rgba(0,0,0,0.2);
 }
 
 input[type=submit]:hover {
@@ -362,3 +369,51 @@ input[type=submit]:hover {
 	box-sizing: border-box; 
 }
 
+fieldset {
+	font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  border: none;
+  margin: 1em 2em;
+  padding: 0.1em 0;
+  border-radius: 0.5em;
+  box-shadow: 0 0.2em 0.3em 0.1em rgba(0,0,0,0.2);
+}
+
+fieldset legend {
+	padding: 0.3em;
+	margin-left: 1em;
+	background-color: black;
+	color:rgb(0, 255, 179);
+	border-radius: 0.5em;
+	box-shadow: 0 0.1em 0.2em 0.1em rgba(0,0,0,0.2);
+	font-size: 1.2em;
+	font-family: 'Press Start 2P', cursive;
+}
+
+.black-border {
+	border: 1px rgb(78, 78, 78) solid;
+}
+
+.red-border {
+	border: 2px #e63946 solid;
+}
+
+.red-border:hover {
+	border: 2px #e63946 solid !important;
+}
+
+.red-border:focus {
+	border: 2px #e63946 solid !important;
+}
+
+#welcome {
+	background-color: #caffbf;
+	color: #1d3557;
+	font-size: 1.2em;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+
+}
