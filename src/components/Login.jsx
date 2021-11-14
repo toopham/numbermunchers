@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Login = (props) =>{
 		let page = <fieldset id='login'><legend>Welcome, {props.user.firstName}. Login to play.</legend><div>
-							<form method='POST' action='/login'>
+							<form method='POST' action='/api/login'>
 								<div><input name="userName" type="text" placeholder="Username"></input></div>
 								<div><input name="password" type="password" placeholder="Password"></input></div>
 								<div><input type='submit' value='LOGIN'></input></div>

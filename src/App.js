@@ -2,13 +2,13 @@ import React, {Component} from "react";
 import GameContainer from "./components/GameContainer";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import axios from 'axios';
-import './stylesheets/style.css';
+import axios from "axios";
+import "./stylesheets/style.css";
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
-  Link
+  Link,
 } from "react-router-dom";
 import { connect } from 'react-redux';
 import * as actions from './actions/actions';
@@ -60,15 +60,15 @@ class App extends Component {
 
 	render(){
 		let links = (<ul>
-			<Link to="/play"><li>Play As Guest</li></Link>
+			<Link to="play"><li>Play As Guest</li></Link>
 			<Link to="/"><li>Login</li></Link>
-			<Link to="/signup"><li>Signup</li></Link>
+			<Link to="signup"><li>Signup</li></Link>
 		</ul>);
 
 		if(this.props.firstName!='Guest'){
 			links = (<ul>
-				<Link to="/play"><li>Play</li></Link>
-				<a href='/logout'><li>Logout</li></a>
+				<Link to="play"><li>Play</li></Link>
+				<a href='/api/logout'><li>Logout</li></a>
 			</ul>);
 		}
 
@@ -82,21 +82,17 @@ class App extends Component {
 
 					{/* A <Switch> looks through its children <Route>s and
 							renders the first one that matches the current URL. */}
-					<Switch>
-						<Route path="/play">
-							<GameContainer />
-						</Route>
-						<Route path="/signup">
-							<Signup updateUser={this.props.updateUser} />
-						</Route>
-						<Route path="/">
-							<Login user={this.props} />
-						</Route>
-					</Switch>
+					<Routes>
+						<Route path="play" element={<GameContainer />} />
+						<Route path="signup" element={	<Signup updateUser={this.props.updateUser} />} />
+						<Route path="/" element={	<Login user={this.props} />} />
+					</Routes>
 				</div>
 			</Router>
 		);
 	}
 }
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

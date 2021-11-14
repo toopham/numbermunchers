@@ -1,6 +1,6 @@
 {
   "name": "numbermunchers",
-  "version": "2.0.0",
+  "version": "0.0.3",
   "description": "Number Munchers Game",
   "main": "index.js",
   "scripts": {
@@ -34,8 +34,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
-    "react-router": "^5.2.1",
-    "react-router-dom": "^5.3.0",
+    "react-router": "^6.0.2",
+    "react-router-dom": "^6.0.2",
     "redux": "^4.1.1",
     "universal-cookie": "^4.0.4"
   },

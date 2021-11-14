@@ -21,11 +21,14 @@ sessionController.isLoggedIn = (req, res, next) => {
 
 
 sessionController.startSession = (req, res, next) =>{
+	console.log('INSIDE START SESSION');
 	res.locals.session = bcrypt.hashSync(res.locals.userName, 10);
 	
 	Session.create({cookieID: res.locals.session, userID: res.locals.userId})
 		.then(session => next())
-		.catch(err => next('Error in sessionController startSession'+JSON.stringify(err)));
+		.catch(err => {
+			console.log('ERROR IN SESSION');
+			next('Error in sessionController startSession'+JSON.stringify(err));});
 };
 
 sessionController.endSession = (req, res, next) =>{

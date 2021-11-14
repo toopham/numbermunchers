@@ -17,7 +17,7 @@ const Signup = (props) => {
 	const [message, setMessage] = useState('');
 
 	const createAccount = (e)=> {
-		axios.post('/signup', state)
+		axios.post('/api/signup', state)
 			.then(res => res.config.data)
 			.then((user)=> {
 				props.updateUser(user);
