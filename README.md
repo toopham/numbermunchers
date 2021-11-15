@@ -1,5 +1,6 @@
 # numbermunchers
 Number Munchers game 
+www.nummunchers.com
 
 ## Description 
 A classic game that I played when I was a kid in the 90's. This is an open source project with the goal of reinventing the game with a few new rules. My hope is to get the younger generation to be excited about math and have fun at the same time. 
