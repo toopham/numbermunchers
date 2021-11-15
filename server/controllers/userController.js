@@ -5,7 +5,7 @@ const userController ={};
 
 userController.getUsers = (req, res, next) =>{
 
-	User.find({}).sort('score').limit(10)
+	User.find({}).sort({score: -1}).limit(10)
 		.then(users => {
 			res.locals.users = users;
 			return next();

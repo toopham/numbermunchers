@@ -285,7 +285,7 @@ nav ul li a:active{
 }
 
 .numGen {
-	border: 1px solid rgb(233, 89, 5);
+	border: 1px solid #e63946;
 	width: 80px;
 	height: 80px;
 	position: absolute;
@@ -416,4 +416,34 @@ fieldset legend {
 	font-family: 'Roboto', sans-serif;
 	font-weight: bold;
 
+}
+
+#gameover {
+	width: 640px;
+	height: 240px;
+	position: absolute;
+	color: #e63946;
+	font-size: 5em;
+	font-weight: bold;
+	left: 160px;
+	top: 160px;
+	font-family: 'Press Start 2P', cursive;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box; 
+}
+
+#nextlevel {
+	width: 640px;
+	height: 240px;
+	position: absolute;
+	color: rgb(0, 255, 179);
+	font-size: 5em;
+	font-weight: bold;
+	left: 0px;
+	top: 160px;
+	font-family: 'Press Start 2P', cursive;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box; 
 }

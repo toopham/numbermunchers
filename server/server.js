@@ -26,6 +26,8 @@ app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, '../public/')));
 
+app.use('/assets', express.static(path.join(__dirname, '../src/assets/')));
+
 
 
 // serve index.html on the route '/'

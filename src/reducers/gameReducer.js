@@ -20,6 +20,7 @@ const initialState = {
 	status: 1,
 	userID: '',
 	muncherPos: [0,0],
+	muncherImg: 'url("assets/num-muncher.png")',
 	numGens: [{color: 'red', Pos: [7,7], active: true, value: ''},
 						{color: 'blue', Pos: [7,7], active: false, value: ''},
 						{color: 'orange', Pos: [7,7], active: false}],
@@ -45,28 +46,41 @@ const gameReducer = (state = initialState, action) => {
 	let level = state.level;
 	let lives = state.lives;
 	let score = state.score;
+
 	const newGrid = state.gridState.map(el => [...el]);
 	const newGens = state.numGens.map(obj => Object.assign({},obj));
 	
+	const updateGens = () =>{
+		let muncherStatus = muncherSRC[0];
+		newGens.forEach(num=>{
+			if(newPos[0]===num.Pos[0] && newPos[1]===num.Pos[1] && num.active === true){
+				if(newGrid[newPos[0]][newPos[1]]%mult===0 && newGrid[newPos[0]][newPos[1]]!=''){
+					num.active = false;
+					muncherStatus = muncherSRC[1]; //Ate the numBoss at a multiple of mult
+					num.value = newGrid[newPos[0]][newPos[1]];
+				}
+				else{
+					lives-=1;
+					muncherStatus = muncherSRC[2]; //Ate numBoss at the wrong multiple
+					num.active = false;
+				}
+				newGrid[newPos[0]][newPos[1]] = '';
+			}
+		});
+
+		return muncherStatus;
+	};
+
+
+	const muncherSRC = ['url("assets/num-muncher.png")', 'url("assets/num-muncher-happy.png")', 'url("assets/num-muncher-sick.png")'];
 	switch (action.type){
 		case types.MOVE_LEFT:
-			if(status===0) return {...state};
+			if(status!=1) return {...state};
 			if(state.muncherPos[1]>0){
 				newPos[1]-=1;
 			}
 
-			newGens.forEach(num=>{
-				if(newPos[0]===num.Pos[0] && newPos[1]===num.Pos[1]){
-					if(newGrid[newPos[0]][newPos[1]]%mult===0){
-						num.active = false;
-						num.value = newGrid[newPos[0]][newPos[1]];
-					}
-					else{
-						lives-=1;
-					}
-					newGrid[newPos[0]][newPos[1]] = '';
-				}
-			});
+			muncherStatus = updateGens();
 
 			if(lives===0) status=0;
 
@@ -77,25 +91,15 @@ const gameReducer = (state = initialState, action) => {
 				gridState: newGrid,
 				muncherPos: newPos,
 				numGens: newGens,
+				muncherImg: muncherStatus,
 			};
 		case types.MOVE_RIGHT:
-			if(status===0) return {...state};
+			if(status!=1) return {...state};
 			if(state.muncherPos[1]<7){
 				newPos[1]+=1;
 			}
 
-			newGens.forEach(num=>{
-				if(newPos[0]===num.Pos[0] && newPos[1]===num.Pos[1]){
-					if(newGrid[newPos[0]][newPos[1]]%mult===0){
-						num.active = false;
-						num.value = newGrid[newPos[0]][newPos[1]];
-					}
-					else{
-						lives-=1;
-					}
-					newGrid[newPos[0]][newPos[1]] = '';
-				}
-			});
+			muncherStatus = updateGens();
 
 			if(lives===0) status=0;
 
@@ -106,25 +110,15 @@ const gameReducer = (state = initialState, action) => {
 				gridState: newGrid,
 				muncherPos: newPos,
 				numGens: newGens,
+				muncherImg: muncherStatus,
 			};
 		case types.MOVE_UP:
-			if(status===0) return {...state};
+			if(status!=1) return {...state};
 			if(state.muncherPos[0]>0){
 				newPos[0]-=1;
 			}
 
-			newGens.forEach(num=>{
-				if(newPos[0]===num.Pos[0] && newPos[1]===num.Pos[1]){
-					if(newGrid[newPos[0]][newPos[1]]%mult===0){
-						num.active = false;
-						num.value = newGrid[newPos[0]][newPos[1]];
-					}
-					else{
-						lives-=1;
-					}
-					newGrid[newPos[0]][newPos[1]] = '';
-				}
-			});
+			muncherStatus = updateGens();
 
 			if(lives===0) status=0;
 
@@ -135,25 +129,15 @@ const gameReducer = (state = initialState, action) => {
 				gridState: newGrid,
 				muncherPos: newPos,
 				numGens: newGens,
+				muncherImg: muncherStatus,
 			};
 		case types.MOVE_DOWN:
-			if(status===0) return {...state};
+			if(status!=1) return {...state};
 			if(state.muncherPos[0]<7){
 				newPos[0]+=1;
 			}
 
-			newGens.forEach(num=>{
-				if(newPos[0]===num.Pos[0] && newPos[1]===num.Pos[1]){
-					if(newGrid[newPos[0]][newPos[1]]%mult===0){
-						num.active = false;
-						num.value = newGrid[newPos[0]][newPos[1]];
-					}
-					else{
-						lives-=1;
-					}
-					newGrid[newPos[0]][newPos[1]] = '';
-				}
-			});
+			muncherStatus = updateGens();
 
 			if(lives===0) status=0;
 
@@ -164,17 +148,18 @@ const gameReducer = (state = initialState, action) => {
 				gridState: newGrid,
 				muncherPos: newPos,
 				numGens: newGens,
+				muncherImg: muncherStatus,
 			};
 		case types.EAT_NUM:
-			if(status===0) return {...state};
+			if(status!=1) return {...state};
 			const top = state.muncherPos[0];
 			const left = state.muncherPos[1];
 
 			const num = newGrid[top][left];
+			newGrid[top][left]='';
 			
 			//check if num ate is a correct multiple 
-			if(num%(state.level+1)===0){
-				newGrid[top][left]='';
+			if(num%mult===0){
 
 				//if you eat a 0 then increase lives by 1
 				if(num===0) lives+=1;
@@ -197,6 +182,7 @@ const gameReducer = (state = initialState, action) => {
 					gridState: newGrid,
 					lives: lives,
 					status: status,
+					muncherImg: muncherSRC[1],
 				}
 			}
 			else{
@@ -205,10 +191,12 @@ const gameReducer = (state = initialState, action) => {
 				return {
 					...state,
 					lives: lives,
+					gridState: newGrid,
 					status: status,
+					muncherImg: muncherSRC[2],
 				}
 			}
-		case types.UPDATE_GAME:
+		case types.UPDATE_GAME: //Reset game or move game to next level
 			if(action.payload){
 				mult = action.payload+1;
 				level = action.payload;
@@ -243,6 +231,9 @@ const gameReducer = (state = initialState, action) => {
 			//reset numBoss position
 			newGens.forEach(num=> {
 				num.Pos = [7,7];
+				if(num.color === 'red') num.active = true;
+				if(num.color === 'blue' && level > 4) num.active = true;
+				if(num.color === 'orange' && level > 8) num.active = true;
 			});
 
 			return {
@@ -254,6 +245,7 @@ const gameReducer = (state = initialState, action) => {
 				muncherPos: [0,0],
 				status: 1,
 				numGens: newGens,
+				muncherImg: muncherSRC[0],
 			}
 		case types.UPDATE_USER:
 
@@ -268,9 +260,12 @@ const gameReducer = (state = initialState, action) => {
 				score: action.payload.score,
 			}
 		case types.MOVE_NUM:
+			let muncherStatus =state.muncherImg;
+			let nonActive = true; //Set to be 1 
 			newGens.forEach(num=> {
 				if(num.active){
-					//create vector to Muncher
+					nonActive = false; // If there is an active numBoss then turn off trigger;
+					//create vector to Muncher and move each numBoss towards Muncher
 					const x = state.muncherPos[1] - num.Pos[1];
 					const y = state.muncherPos[0] - num.Pos[0];
 					
@@ -296,13 +291,17 @@ const gameReducer = (state = initialState, action) => {
 					const left = state.muncherPos[1];
 
 					if(top === numPosy && left === numPosx){
-						if(newGrid[top][left]%mult===0){
+						if(newGrid[top][left]%mult===0 && newGrid[newPos[0]][newPos[1]]!=''){
+							//If the square the Muncher is in is a multiple of mult then don't move in
+							//The numBoss is smart to not move into the same square as muncher.
 							return {...state};
 						} 
 						else{
 							newGrid[top][left]='';
 							lives -=1;
 							if(lives===0) status=0;
+							muncherStatus = muncherSRC[2];
+							num.active = false;
 						}
 					}
 
@@ -311,12 +310,18 @@ const gameReducer = (state = initialState, action) => {
 				}
 			});
 
+			if(nonActive){
+				newGens[1].active = true;
+				newGens[1].Pos = [7,7];
+			} 
+		
 			return {
 				...state,
 				lives: lives,
 				status: status,
 				numGens: newGens,
 				gridState: newGrid,
+				muncherImg: muncherStatus,
 			};
 		case types.SCORE_BOARD:
 			const users = action.payload;

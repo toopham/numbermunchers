@@ -59,6 +59,12 @@ class App extends Component {
 
 
 	render(){
+		axios.get('/api').then(res => res.data)
+			.then(res => {
+				this.props.updateUser(res);
+			})
+			.catch(err => console.log('ERROR ACCESSING GET API ', err));
+			
 		let links = (<ul>
 			<Link to="play"><li>Play As Guest</li></Link>
 			<Link to="/"><li>Login</li></Link>

@@ -18,6 +18,7 @@ const mapStateToProps = (state) => ({
 	score: state.game.score,
 	status: state.game.status,
 	muncherPos: state.game.muncherPos,
+	muncherImg: state.game.muncherImg,
 	numGens: state.game.numGens,
 	scoreboard: state.game.scoreboard,
 });
@@ -66,7 +67,7 @@ class GameContainer extends Component{
 
 		const speed = 6000 - 5000*(1/(1+Math.exp(0-this.props.level)));
 
-		if(this.props.status) setTimeout(this.genMover.bind(this), speed);
+		if(this.props.status===1) setTimeout(this.genMover.bind(this), speed);
 	}
 
 	componentDidMount(){
@@ -102,7 +103,7 @@ class GameContainer extends Component{
 	render(){
 		return (<div className="play"><ScoreBoard scoreboard={this.props.scoreboard} /><div className="gamecontainer" ref={this.gameRef} tabIndex="0" onKeyDown={this.handleKey}>
 		<GameStats lives={this.props.lives} level={this.props.level} score={this.props.score} userName={this.props.userName} status={this.props.status} updateGame={this.props.updateGame} resetGame={this.props.resetGame} />
-		<Game muncherPos={this.props.muncherPos} numGens={this.props.numGens} gridState={this.props.gridState} numGuards={this.props.numGuards}/>
+		<Game muncherPos={this.props.muncherPos} numGens={this.props.numGens} gridState={this.props.gridState} status={this.props.status} numGuards={this.props.numGuards} muncherImg={this.props.muncherImg}/>
 		</div> <Rules /></div>);
 	}
 }

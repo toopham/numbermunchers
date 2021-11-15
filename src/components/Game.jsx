@@ -16,14 +16,20 @@ const Game = (props) =>{
 	const numGens = [];
 	props.numGens.forEach(num => {
 		if(num.active){
-			numGens.push(<NumGen color={num.color} Pos={num.Pos} value={num.value} />);
+			numGens.push(<NumGen key={num.color} color={num.color} Pos={num.Pos} />);
 		}
 	});
 
+	let gameStatus =[];
+
+	if(props.status === 0 ) gameStatus.push(<div id="gameover">Game Over</div>);
+	if(props.status === 2 ) gameStatus.push(<div id="nextlevel">You Win!</div>);
+
 	return (<div className="gamegrid">
 			{boxArray}
-			<Muncher top={props.muncherPos[0]} left={props.muncherPos[1]} />
+			<Muncher top={props.muncherPos[0]} left={props.muncherPos[1]} muncherImg={props.muncherImg} />
 			{numGens}
+			{gameStatus}
 			</div>);
 };
 
