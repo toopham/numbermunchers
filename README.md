@@ -17,7 +17,7 @@ bundle react app with webpack by using the command
 npm run build
 ```
 
-**Database**
+*Database*:
 You will need a MongoDB URI. You can go to www.mongodb.com and register for an account. 
 Create a file secret.js at the path server/data/secret.js and include in the URI you want to use.
 Your secret.js file should look something like this
