@@ -64,6 +64,7 @@ class GameContainer extends Component{
 
 	genMover(){
 		this.props.moveNum();
+		this.gameRef.current.focus();
 
 		const speed = 6000 - 5000*(1/(1+Math.exp(0-this.props.level)));
 

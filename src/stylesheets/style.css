@@ -271,7 +271,7 @@ nav ul li a:active{
 }
 
 .muncher {
-	border: 1px solid rgb(81, 255, 168);
+	/*border: 1px solid rgb(81, 255, 168);*/
 	width: 80px;
 	height: 80px;
 	position: absolute;
@@ -285,7 +285,7 @@ nav ul li a:active{
 }
 
 .numGen {
-	border: 1px solid #e63946;
+	/*border: 1px solid #e63946;*/
 	width: 80px;
 	height: 80px;
 	position: absolute;
