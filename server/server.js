@@ -8,8 +8,7 @@ const userController = require('./controllers/userController');
 const sessionController = require('./controllers/sessionController');
 const cookieController = require('./controllers/cookieController');
 
-const MONGO_URI = 'mongodb+srv://dbtoopham:SSOH7YREdv0WtXb4@nummunchersdb.fzjmt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-
+const MONGO_URI = require('./data/secret.js')
 
 mongoose.connect(MONGO_URI, {
 	useNewUrlParser: true,

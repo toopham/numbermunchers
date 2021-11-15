@@ -1,6 +1,6 @@
 {
   "name": "numbermunchers",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Number Munchers Game",
   "main": "index.js",
   "scripts": {
