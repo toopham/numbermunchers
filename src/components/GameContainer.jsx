@@ -60,31 +60,44 @@ class GameContainer extends Component{
 	constructor(props){
 		super(props);
 		this.gameRef = React.createRef();
+
+		//Is numGen moving?
+		this.genMoving = false;
 	}
 
 	genMover(){
 		this.props.moveNum();
 		this.gameRef.current.focus();
+		//Once this function is called we set it to true.
+		this.genMoving = true;
 
 		const speed = 6000 - 5000*(1/(1+Math.exp(0-this.props.level)));
 
 		if(this.props.status===1) setTimeout(this.genMover.bind(this), speed);
+		else{
+			this.genMoving = false;
+		}
 	}
 
 	componentDidMount(){
 		this.props.resetGame();
 		this.gameRef.current.focus();
 
-		this.genMover();
+		//If numGEn is not moving then make it move.
+		if(this.genMoving === false) this.genMover();
+
 	}
 
 	componentDidUpdate(){
 		this.gameRef.current.focus();
 
+		//if numGen is not moving then make it move.
+		if(this.genMoving === false) this.genMover();
 	}
 
 	handleKey = e => {
-		
+
+
 		//If LEFT_ARROW IS PRESS
 		if(e.keyCode === 37) this.props.moveLeft();
 		//If UP_ARROW IS PRESS

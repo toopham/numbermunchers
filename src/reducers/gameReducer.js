@@ -349,7 +349,7 @@ const gameReducer = (state = initialState, action) => {
 				}
 			});
 
-			if(lives===0) status=0;
+			if(lives <= 0) status=0;
 			
 			return {
 				...state,
