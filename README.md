@@ -1,4 +1,4 @@
-# numbermunchers
+# nummunchers
 Number Munchers game 
 www.nummunchers.com
 
