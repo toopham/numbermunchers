@@ -48,7 +48,7 @@ npm start
 
 
 ## Getting involved
-This is a personal project that I would love to get feedback/contributions from other developers. You can reach out to me through Github or email me at toopham at gmail dot com.
+I welcome all feedback/contributions from other developers. If you are interested in this project you can reach out to me through Github, Linkedin, or email me at toopham at gmail dot com.
 
 
 ## Open source licensing info
