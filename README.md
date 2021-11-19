@@ -47,7 +47,7 @@ npm start
 
 
 
-##Getting involved
+## Getting involved
 This is a personal project that I would love to get feedback/contributions from other developers. You can reach out to me through Github or email me at toopham at gmail dot com.
 
 
