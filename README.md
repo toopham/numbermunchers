@@ -38,7 +38,7 @@ npm run build
 ```
 
 
-Start server with game running 
+Start server with game running on localhost:3000
 ```
 npm start
 ```
